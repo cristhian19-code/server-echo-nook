@@ -1,26 +1,24 @@
-const express = require('express');
+const express = require("express");
 
-const { validatorFields } = require('../middlewares/validator');
-const { existUserByID } = require('../helpers/db-validators');
-const { check } = require('express-validator');
-
-const { getTags, createTag, updateTag, deleteTag } = require('../controllers/tags.controller');
+const {
+  getTags,
+  createTag,
+  updateTag,
+  deleteTag,
+} = require("../controllers/tags.controller");
 
 const router = express.Router();
 
 // Obtener tags
-router.get('/', getTags);
+router.get("/:id", getTags);
 
 // Crear un tag
-router.post('/:id', [
-    check('id').custom(existUserByID),
-    validatorFields
-],createTag);
+router.post("/", createTag);
 
 // Actualizar un post
-router.put('/', updateTag);
+router.put("/", updateTag);
 
 // Eliminar un post
-router.delete('/:id', deleteTag);
+router.delete("/:id", deleteTag);
 
 module.exports = router;
